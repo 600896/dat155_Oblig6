@@ -17,6 +17,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
 
 renderer.render(scene, camera);
+
 //lage torus figer
 const geometry = new THREE.TorusGeometry( 10, 3, 100, 16 );;
 const material = new THREE.MeshStandardMaterial({ color: 0x6347FF});
@@ -32,12 +33,6 @@ const ambientLight = new THREE.AmbientLight(0xffffff);
 
 scene.add(pointLight, ambientLight);
 
-//lager rutenett, kan ikke se så bra på svart bakgrunn
-const lightHelper = new THREE.PointLightHelper(pointLight, 5);
-const gridHelper = new THREE.GridHelper(200, 50);
-scene.add(lightHelper, gridHelper);
-
-//torusen snurrer
 function animate() {
     requestAnimationFrame(animate);
 
@@ -45,6 +40,7 @@ function animate() {
     torus.rotation.y += 0.005;
     torus.rotation.z += 0.01;
 
+    //controls.update();
 
     renderer.render(scene, camera);
 }

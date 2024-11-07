@@ -1,0 +1,17 @@
+{
+  "name": "dat155_oblig6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/600896/dat155_Oblig6.git"
+  },
+  "private": true,
+  "dependencies": {
+    "three": "^0.170.0"
+  }
+}
