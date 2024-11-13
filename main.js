@@ -1,4 +1,6 @@
-import * as THREE from 'https://unpkg.com/three@0.150.1/build/three.module.js';
+import * as THREE from './node_modules/three'
+import { OrbitControls } from './Controls/OrbitControls';
+
 
 //Oppretter en scene
 const scene = new THREE.Scene();
@@ -14,7 +16,12 @@ const renderer = new THREE.WebGLRenderer({
 //kamera greier
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
+
+const controls = new OrbitControls( camera, renderer.domElement );
+
+//controls.update() must be called after any manual changes to the camera's transform
+camera.position.set( 0, 20, 100 );
+controls.update();
 
 renderer.render(scene, camera);
 
@@ -33,9 +40,20 @@ const ambientLight = new THREE.AmbientLight(0xffffff);
 
 scene.add(pointLight, ambientLight);
 
+const size = 100;
+const divisions = 100;
+
+const gridHelper = new THREE.GridHelper( size, divisions );
+scene.add( gridHelper );
+
+
+controls.update();
+
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+
+    controls.update();
 }
 
 animate();
