@@ -1,14 +1,17 @@
-import * as THREE from'https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js';
-
-//import { OrbitControls } from '/http://localhost:63343/controls/OrbitControls.js';;
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 //import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 
 //Oppretter en scene
 const scene = new THREE.Scene();
 
+
+
 //kamera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+
 
 //lager canvas og renderer
 const renderer = new THREE.WebGLRenderer({
@@ -27,9 +30,11 @@ camera.lookAt( 0, 0, 0 );
 //controls.update();
 
 renderer.render(scene, camera);
+const controls = new OrbitControls(camera,renderer.domElement);
+
 
 //lage torus figer
-const geometry = new THREE.TorusGeometry( 10, 3, 100, 16 );;
+const geometry = new THREE.TorusGeometry( 10, 3, 100, 16 );
 const material = new THREE.MeshStandardMaterial({ color: 0x6347FF});
 const torus = new THREE.Mesh(geometry, material);
 scene.add(torus);
@@ -55,6 +60,7 @@ scene.add( gridHelper );
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+    controls.update();
 
     torus.rotation.x += 0.01; // Adjust these values for desired rotation speed
     torus.rotation.y += 0.005;
