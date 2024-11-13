@@ -1,5 +1,7 @@
-import * as THREE from './node_modules/three'
-import { OrbitControls } from './Controls/OrbitControls';
+import * as THREE from'https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js';
+
+//import { OrbitControls } from '/http://localhost:63343/controls/OrbitControls.js';;
+//import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 
 //Oppretter en scene
@@ -17,11 +19,12 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-const controls = new OrbitControls( camera, renderer.domElement );
+//const controls = new OrbitControls( camera, renderer.domElement );
 
 //controls.update() must be called after any manual changes to the camera's transform
 camera.position.set( 0, 20, 100 );
-controls.update();
+camera.lookAt( 0, 0, 0 );
+//controls.update();
 
 renderer.render(scene, camera);
 
@@ -41,19 +44,21 @@ const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
 const size = 100;
-const divisions = 100;
+const divisions = 50;
 
 const gridHelper = new THREE.GridHelper( size, divisions );
 scene.add( gridHelper );
 
 
-controls.update();
+//controls.update();
 
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 
-    controls.update();
+    torus.rotation.x += 0.01; // Adjust these values for desired rotation speed
+    torus.rotation.y += 0.005;
+    torus.rotation.z -= 0.01;
 }
 
 animate();
